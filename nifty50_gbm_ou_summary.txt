@@ -1,0 +1,20 @@
+ADF TEST RESULTS
+Price       | ADF Stat:   1.4692 | p-value: 0.9974
+Returns     | ADF Stat: -14.7780 | p-value: 0.0000
+
+GBM PARAMETERS (DAILY)
+Drift (mu): 0.000392
+Volatility (sigma): 0.013054
+
+OU VOLATILITY PARAMETERS
+Theta: 0.0084
+Long-run mean: 0.0110
+Sigma: 0.0009
+Half-life (days): 82.60
+
+FORECAST SUMMARY
+============================================================
+Current Price: 26129.60
+Expected Price (1Y): 28745.56
+Expected Change: +10.01%
+============================================================
