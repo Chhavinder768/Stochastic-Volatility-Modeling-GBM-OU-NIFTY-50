@@ -100,6 +100,8 @@ print(f"Long-run mean: {mu_v:.4f}")
 print(f"Sigma: {sigma_v:.4f}")
 print(f"Half-life (days): {half_life:.2f}")
 
+
+
 # =========================================================
 # 7. SIMULATE OU VOLATILITY
 # =========================================================
@@ -219,6 +221,32 @@ plt.show()
 print("\nFORECAST SUMMARY")
 print("=" * 60)
 print(f"Current Price: {S0:.2f}")
-print(f"Expected Price (1Y): {mean_forecast[-1]:.2f}")
-print(f"Expected Change: {(mean_forecast[-1]/S0 - 1)*100:+.2f}%")
+print(f"Expected Price (1Y): {price_paths[:, 1:].mean(axis=0)[-1]:.2f}")
+print(f"Expected Change: {(price_paths[:, 1:].mean(axis=0)[-1]/S0 - 1)*100:+.2f}%")
 print("=" * 60)
+
+
+# =============================================================================
+# ADF results , GBM and OU parameters, and forcast summary in a text file
+# =============================================================================
+
+with open("nifty50_gbm_ou_summary.txt", "w") as f:
+    f.write("ADF TEST RESULTS\n")
+    stat, pvalue, *_ = adfuller(prices)
+    f.write(f"Price       | ADF Stat: {stat:>8.4f} | p-value: {pvalue:.4f}\n")
+    stat, pvalue, *_ = adfuller(log_returns)
+    f.write(f"Returns     | ADF Stat: {stat:>8.4f} | p-value: {pvalue:.4f}\n")
+    f.write("\nGBM PARAMETERS (DAILY)\n")
+    f.write(f"Drift (mu): {mu:.6f}\n")
+    f.write(f"Volatility (sigma): {sigma_hist:.6f}\n")
+    f.write("\nOU VOLATILITY PARAMETERS\n")
+    f.write(f"Theta: {theta_v:.4f}\n")
+    f.write(f"Long-run mean: {mu_v:.4f}\n")
+    f.write(f"Sigma: {sigma_v:.4f}\n")
+    f.write(f"Half-life (days): {half_life:.2f}\n")
+    f.write("\nFORECAST SUMMARY\n")
+    f.write("=" * 60 + "\n")
+    f.write(f"Current Price: {S0:.2f}\n")
+    f.write(f"Expected Price (1Y): {price_paths[:, 1:].mean(axis=0)[-1]:.2f}\n")
+    f.write(f"Expected Change: {(price_paths[:, 1:].mean(axis=0)[-1]/S0 - 1)*100:+.2f}%\n")
+    f.write("=" * 60 + "\n")
