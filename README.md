@@ -31,8 +31,9 @@ Only closing prices are used after basic validation and cleaning.
 
 Prices are converted to log returns, which are more stable and additive over time:
 
-rt = log(Pt/Pt-1)
-
+$$
+r_t = \log\left(\frac{P_t}{P_{t-1}}\right)
+$$
 
 
 ### 2.Stationarity Check
